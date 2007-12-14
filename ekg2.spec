@@ -110,8 +110,7 @@ chrpath -d %{buildroot}%{_libdir}/ekg2/plugins/xosd.so %{buildroot}%{_libdir}/ek
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc NEWS* README-main docs/*
-%attr(755,root,root) %{_bindir}/ekg2
-%attr(755,root,root) %{_bindir}/ioctld
+%attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so

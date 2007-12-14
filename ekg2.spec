@@ -1,14 +1,14 @@
-%define		_snapshot 20070226
+%define		_snapshot 20071213
 
 Summary:	Opensource multi-protocol instatnt messaging client
 Name:		ekg2
-Version:	1.0
-Release:	%mkrel 0.%{_snapshot}.5
-License:	GPL
+Version:	0.1
+Epoch:		1
+Release:	%mkrel 0.%{_snapshot}.1
+License:	GPLv2+
 Group:		Networking/Instant messaging
 URL:		http://ekg2.org/
 Source0:	http://pl.ekg2.org/%{name}-%{_snapshot}.tar.bz2
-Patch0:		%{name}-correct-ioctld-path.patch
 BuildRequires:	libaspell-devel
 BuildRequires:	libexpat-devel
 BuildRequires:	gettext-devel
@@ -52,7 +52,6 @@ Development files for ekg2.
 
 %prep
 %setup -qn %{name}-%{_snapshot}
-%patch0 -p0 -b .ekg-correct-ioctld-path
 
 %build
 
@@ -87,6 +86,7 @@ rm -rf docs/ekg2book-en/{CVS,.cvsignore,Makefile*}
 rm -rf docs/ekg2book-en/design/CVS
 rm -f %{buildroot}%{_libdir}/%{name}/plugins/*.la
 mv -f README README-main
+mv %{buildroot}%{_libdir}/ioctld %{buildroot}%{_bindir}
 
 %ifarch i586
 mv -f %{buildroot}%{perl_sitelib}/i386-linux/* %{buildroot}%{perl_vendorlib}/i386-linux
@@ -129,5 +129,3 @@ chrpath -d %{buildroot}%{_libdir}/ekg2/plugins/xosd.so %{buildroot}%{_libdir}/ek
 %attr(755,root,root) %{_datadir}/%{name}/scripts/notify-bubble.py
 %dir %{_datadir}/%{name}/themes
 %{_datadir}/%{name}/themes/*
-
-

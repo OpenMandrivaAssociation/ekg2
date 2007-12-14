@@ -50,21 +50,6 @@ Development files for ekg2.
 %attr(755,root,root) %{_bindir}/ekg2-config
 %{_includedir}/ekg2/*
 
-%ifarch x86_64
-
-%package static-devel
-Summary:	Static library for ekg2
-Group:		Development/C
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description static-devel
-Static files for ekg2.
-
-%files static-devel
-%{_libdir}/%{name}/plugins/*.a
-
-%endif
-
 %prep
 %setup -qn %{name}-%{_snapshot}
 %patch0 -p0 -b .ekg-correct-ioctld-path

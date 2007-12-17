@@ -30,7 +30,6 @@ BuildRequires:	libsqlite3-devel
 BuildRequires:	libgpgme-devel
 BuildRequires:	chrpath
 Conflicts:	ekg
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 EKG2 is opensource IM client for Unix systems. 

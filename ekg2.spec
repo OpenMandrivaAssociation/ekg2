@@ -10,6 +10,7 @@ URL:		http://ekg2.org/
 Source0:	http://pl.ekg2.org/%{name}-%{_snapshot}.tar.bz2
 Patch0:     ekg2-gcc43.patch
 Patch1:     ekg2-gtk2-2.13.patch
+Patch2:     ekg2-20071213-perl-install.patch
 BuildRequires:	libaspell-devel
 BuildRequires:	libexpat-devel
 BuildRequires:	gettext-devel
@@ -55,6 +56,7 @@ Development files for ekg2.
 %setup -qn %{name}-%{_snapshot}
 %patch0 -p 1
 %patch1 -p 1
+%patch2 -p 1
 export AUTOMAKE="automake --foreign"
 autoreconf -fi
 
@@ -68,14 +70,15 @@ autoreconf -fi
     --with-libgsm \
     --with-python \
     --without-readline \
-    --with-xosd \
     --with-sqlite \
     --with-sqlite3 \
     --with-gtk \
     --enable-unicode \
     --disable-rpath
 					    
-%make
+# /usr/bin/gpgme-config --cflags returns empty string, but build fails:
+# error: GPGME was compiled with _FILE_OFFSET_BITS = 64
+%make GPGME_CFLAGS="-D_FILE_OFFSET_BITS=64"
 					    
 %install
 rm -rf %{buildroot}
@@ -93,15 +96,7 @@ rm -f %{buildroot}%{_libdir}/%{name}/plugins/*.la
 mv -f README README-main
 mv %{buildroot}%{_libdir}/ioctld %{buildroot}%{_bindir}
 
-%ifarch i586
-mv -f %{buildroot}%{perl_sitelib}/i386-linux/* %{buildroot}%{perl_vendorlib}/i386-linux
-rm -rf %{buildroot}%{perl_sitelib}
-%endif
-
 %ifarch x86_64
-mv -f %{buildroot}%{perl_sitelib}/x86_64-linux/* %{buildroot}%{perl_vendorlib}/i386-linux
-rm -rf %{buildroot}%{perl_sitelib}
-
 chrpath -d %{buildroot}%{_libdir}/ekg2/plugins/gpg.so %{buildroot}%{_libdir}/ekg2/plugins/gpg.so
 chrpath -d %{buildroot}%{_libdir}/ekg2/plugins/jabber.so %{buildroot}%{_libdir}/ekg2/plugins/jabber.so
 chrpath -d %{buildroot}%{_libdir}/ekg2/plugins/xosd.so %{buildroot}%{_libdir}/ekg2/plugins/xosd.so
@@ -110,27 +105,13 @@ chrpath -d %{buildroot}%{_libdir}/ekg2/plugins/xosd.so %{buildroot}%{_libdir}/ek
 %find_lang %{name}
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files -f %{name}.lang
-%defattr(644,root,root,755)
+%defattr(-,root,root)
 %doc NEWS* README-main docs/*
-%attr(755,root,root) %{_bindir}/*
-%dir %{_libdir}/%{name}
-%dir %{_libdir}/%{name}/plugins
-%attr(755,root,root) %{_libdir}/%{name}/plugins/*.so
-%dir %{_datadir}/%{name}
-%dir %{_datadir}/%{name}/plugins
-%dir %{perl_vendorlib}/i386-linux/Ekg2
-%dir %{perl_vendorlib}/i386-linux/auto/Ekg2
-%{perl_vendorlib}/i386-linux/Ekg2.pm
-%{perl_vendorlib}/i386-linux/Ekg2/Irc.pm
-%attr(755,root,root) %{perl_vendorlib}/i386-linux/auto/Ekg2/Ekg2.so
-%attr(755,root,root) %{perl_vendorlib}/i386-linux/auto/Ekg2/Irc/Irc.so
-%{_datadir}/%{name}/*.txt
-%{_datadir}/%{name}/plugins/*
-%dir %{_datadir}/%{name}/scripts
-%{_datadir}/%{name}/scripts/*.pl
-%attr(755,root,root) %{_datadir}/%{name}/scripts/notify-bubble.py
-%dir %{_datadir}/%{name}/themes
-%{_datadir}/%{name}/themes/*
+%{_bindir}/*
+%{_libdir}/%{name}
+%{_datadir}/%{name}
+%{perl_vendorarch}/Ekg2
+%{perl_vendorarch}/auto/Ekg2

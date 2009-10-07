@@ -8,6 +8,8 @@ License:	GPLv2+
 Group:		Networking/Instant messaging
 URL:		http://ekg2.org/
 Source0:	http://pl.ekg2.org/%{name}-%{_snapshot}.tar.bz2
+Patch0:     ekg2-gcc43.patch
+Patch1:     ekg2-gtk2-2.13.patch
 BuildRequires:	libaspell-devel
 BuildRequires:	libexpat-devel
 BuildRequires:	gettext-devel
@@ -51,6 +53,10 @@ Development files for ekg2.
 
 %prep
 %setup -qn %{name}-%{_snapshot}
+%patch0 -p 1
+%patch1 -p 1
+export AUTOMAKE="automake --foreign"
+autoreconf -fi
 
 %build
 

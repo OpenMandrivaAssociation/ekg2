@@ -114,4 +114,5 @@ rm -rf %{buildroot}
 %{_libdir}/%{name}
 %{_datadir}/%{name}
 %{perl_vendorarch}/Ekg2
+%{perl_vendorarch}/Ekg2.pm
 %{perl_vendorarch}/auto/Ekg2

@@ -3,7 +3,7 @@
 Summary:	Opensource multi-protocol instatnt messaging client
 Name:		ekg2
 Version:	1.0
-Release:	%mkrel 0.%{_snapshot}.4
+Release:	%mkrel 0.%{_snapshot}.5
 License:	GPLv2+
 Group:		Networking/Instant messaging
 URL:		http://ekg2.org/

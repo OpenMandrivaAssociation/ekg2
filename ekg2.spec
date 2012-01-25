@@ -3,18 +3,18 @@
 Summary:	Opensource multi-protocol instatnt messaging client
 Name:		ekg2
 Version:	1.0
-Release:	%mkrel 0.%{_snapshot}.5
+Release:	5
 License:	GPLv2+
 Group:		Networking/Instant messaging
 URL:		http://ekg2.org/
 Source0:	http://pl.ekg2.org/%{name}-%{_snapshot}.tar.bz2
-Patch0:     ekg2-gcc43.patch
-Patch1:     ekg2-gtk2-2.13.patch
-Patch2:     ekg2-20071213-perl-install.patch
+Patch0:		ekg2-gcc43.patch
+Patch1:		ekg2-gtk2-2.13.patch
+Patch2:		ekg2-20071213-perl-install.patch
 BuildRequires:	libaspell-devel
 BuildRequires:	libexpat-devel
 BuildRequires:	gettext-devel
-BuildRequires:	libgnutls-devel		>= 1.4.5
+BuildRequires:	libgnutls-devel >= 1.4.5
 BuildRequires:	libgpm-devel
 BuildRequires:	libgtk+2-devel
 BuildRequires:	libgadu-devel
@@ -22,8 +22,8 @@ BuildRequires:	libgsm-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
-BuildRequires:	libncursesw-devel	>= 5.5
-BuildRequires:	libopenssl-devel	>= 0.9.8g
+BuildRequires:	libncursesw-devel >= 5.5
+BuildRequires:	libopenssl-devel >= 0.9.8g
 BuildRequires:	libpython-devel
 BuildRequires:	perl-devel
 BuildRequires:	libreadline-devel
@@ -33,24 +33,18 @@ BuildRequires:	libsqlite3-devel
 BuildRequires:	libgpgme-devel
 BuildRequires:	chrpath
 Conflicts:	ekg
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 EKG2 is opensource IM client for Unix systems. 
 Program supports plugins, which make possibility 
 to support many diffrent protocols.
 
-%package devel
+%package	devel
 Summary:	Development files for ekg2
 Group:		Development/C
 
-%description devel
+%description	devel
 Development files for ekg2.
-
-%files devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/ekg2-config
-%{_includedir}/ekg2/*
 
 %prep
 %setup -qn %{name}-%{_snapshot}
@@ -61,7 +55,6 @@ export AUTOMAKE="automake --foreign"
 autoreconf -fi
 
 %build
-
 %configure2_5x \
     --with-aspell \
     --with-expat \
@@ -81,7 +74,6 @@ autoreconf -fi
 %make GPGME_CFLAGS="-D_FILE_OFFSET_BITS=64"
 					    
 %install
-rm -rf %{buildroot}
 install -d %{buildroot}%{_datadir}/%{name}/scripts
 install -d  %{buildroot}%{perl_vendorlib}/i386-linux
 
@@ -104,11 +96,7 @@ chrpath -d %{buildroot}%{_libdir}/ekg2/plugins/xosd.so %{buildroot}%{_libdir}/ek
 
 %find_lang %{name}
 
-%clean
-rm -rf %{buildroot}
-
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc NEWS* README-main docs/*
 %{_bindir}/*
 %{_libdir}/%{name}
@@ -116,3 +104,8 @@ rm -rf %{buildroot}
 %{perl_vendorarch}/Ekg2
 %{perl_vendorarch}/Ekg2.pm
 %{perl_vendorarch}/auto/Ekg2
+
+%files devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/ekg2-config
+%{_includedir}/ekg2/*

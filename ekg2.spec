@@ -11,26 +11,26 @@ Source0:	http://pl.ekg2.org/%{name}-%{_snapshot}.tar.bz2
 Patch0:		ekg2-gcc43.patch
 Patch1:		ekg2-gtk2-2.13.patch
 Patch2:		ekg2-20071213-perl-install.patch
-BuildRequires:	libaspell-devel
-BuildRequires:	libexpat-devel
+BuildRequires:	aspell-devel
+BuildRequires:	expat-devel
 BuildRequires:	gettext-devel
-BuildRequires:	libgnutls-devel >= 1.4.5
-BuildRequires:	libgpm-devel
-BuildRequires:	libgtk+2-devel
-BuildRequires:	libgadu-devel
+BuildRequires:	pkgconfig(gnutls)
+BuildRequires:	gpm-devel
+BuildRequires:	pkgconfig(gtk+-2.0)
+BuildRequires:	pkgconfig(libgadu)
 BuildRequires:	libgsm-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
-BuildRequires:	libncursesw-devel >= 5.5
-BuildRequires:	libopenssl-devel >= 0.9.8g
-BuildRequires:	libpython-devel
+BuildRequires:	pkgconfig(ncursesw)
+BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(python)
 BuildRequires:	perl-devel
-BuildRequires:	libreadline-devel
-BuildRequires:	libxosd-devel
-BuildRequires:	libsqlite-devel
-BuildRequires:	libsqlite3-devel
-BuildRequires:	libgpgme-devel
+BuildRequires:	readline-devel
+BuildRequires:	xosd-devel
+BuildRequires:	pkgconfig(sqlite3)
+BuildRequires:	pkgconfig(sqlite3)
+BuildRequires:	gpgme-devel
 BuildRequires:	chrpath
 Conflicts:	ekg
 

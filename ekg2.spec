@@ -1,16 +1,13 @@
-%define		_snapshot 20071213
+%define		_snapshot 20120212
 
 Summary:	Opensource multi-protocol instatnt messaging client
 Name:		ekg2
 Version:	1.0
-Release:	6
+Release:	7.%{_snapshot}.1
 License:	GPLv2+
 Group:		Networking/Instant messaging
 URL:		http://ekg2.org/
 Source0:	http://pl.ekg2.org/%{name}-%{_snapshot}.tar.bz2
-Patch0:		ekg2-gcc43.patch
-Patch1:		ekg2-gtk2-2.13.patch
-Patch2:		ekg2-20071213-perl-install.patch
 BuildRequires:	aspell-devel
 BuildRequires:	expat-devel
 BuildRequires:	gettext-devel
@@ -31,28 +28,20 @@ BuildRequires:	xosd-devel
 BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	gpgme-devel
-BuildRequires:	chrpath
 Conflicts:	ekg
+Conflicts:	%{name}-devel
 
 %description
 EKG2 is opensource IM client for Unix systems. 
 Program supports plugins, which make possibility 
 to support many diffrent protocols.
 
-%package	devel
-Summary:	Development files for ekg2
-Group:		Development/C
-
-%description	devel
-Development files for ekg2.
-
 %prep
 %setup -qn %{name}-%{_snapshot}
-%patch0 -p 1
-%patch1 -p 1
-%patch2 -p 1
 export AUTOMAKE="automake --foreign"
 autoreconf -fi
+sed -i "s/);/,\n\t'INSTALLDIRS' => 'vendor');/" plugins/perl/common/Makefile.PL
+sed -i "s/);/,\n\t'INSTALLDIRS' => 'vendor');/" plugins/perl/irc/Makefile.PL
 
 %build
 %configure2_5x \
@@ -85,27 +74,14 @@ rm -rf docs/ekg2book/design/CVS
 rm -rf docs/ekg2book-en/{CVS,.cvsignore,Makefile*}
 rm -rf docs/ekg2book-en/design/CVS
 rm -f %{buildroot}%{_libdir}/%{name}/plugins/*.la
-mv -f README README-main
-mv %{buildroot}%{_libdir}/ioctld %{buildroot}%{_bindir}
-
-%ifarch x86_64
-chrpath -d %{buildroot}%{_libdir}/ekg2/plugins/gpg.so %{buildroot}%{_libdir}/ekg2/plugins/gpg.so
-chrpath -d %{buildroot}%{_libdir}/ekg2/plugins/jabber.so %{buildroot}%{_libdir}/ekg2/plugins/jabber.so
-chrpath -d %{buildroot}%{_libdir}/ekg2/plugins/xosd.so %{buildroot}%{_libdir}/ekg2/plugins/xosd.so
-%endif
 
 %find_lang %{name}
 
 %files -f %{name}.lang
-%doc NEWS* README-main docs/*
+%doc docs/*
 %{_bindir}/*
 %{_libdir}/%{name}
 %{_datadir}/%{name}
 %{perl_vendorarch}/Ekg2
 %{perl_vendorarch}/Ekg2.pm
 %{perl_vendorarch}/auto/Ekg2
-
-%files devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/ekg2-config
-%{_includedir}/ekg2/*

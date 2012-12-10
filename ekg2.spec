@@ -85,3 +85,100 @@ rm -f %{buildroot}%{_libdir}/%{name}/plugins/*.la
 %{perl_vendorarch}/Ekg2
 %{perl_vendorarch}/Ekg2.pm
 %{perl_vendorarch}/auto/Ekg2
+
+
+%changelog
+* Sun Feb 12 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 1.0-7.20120212.1
++ Revision: 773530
+- new snapshot
+- devel package dropped
+- clean out some misc junk...
+- use pkgconfig() dependencies
+- svn commit -m mass rebuild of perl extension against perl 5.14.2
+- cleanup
+
+* Tue Jul 20 2010 Jérôme Quelin <jquelin@mandriva.org> 1.0-0.20071213.5mdv2011.0
++ Revision: 555669
+- rebuild
+
+* Wed Apr 21 2010 Funda Wang <fwang@mandriva.org> 1.0-0.20071213.4mdv2010.1
++ Revision: 537456
+- rebuild
+
+* Thu Oct 08 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1.0-0.20071213.3mdv2010.0
++ Revision: 456005
+- fix perl modules installation
+- %%files section cleanup
+- fix build, using fedora patches
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+    - kill re-definition of %%buildroot on Pixel's request
+
+  + Nicolas Lécureuil <nlecureuil@mandriva.com>
+    - Rebuild for new perl
+
+  + Olivier Blin <blino@mandriva.org>
+    - restore BuildRoot
+
+* Fri Dec 14 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0-0.20071213.1mdv2008.1
++ Revision: 120031
+- new snapshot
+- drop patch 0
+
+* Fri Dec 14 2007 Thierry Vignaud <tv@mandriva.org> 1.0-0.20070226.5mdv2008.1
++ Revision: 119946
+- simplify file list
+- there's no more *.a files on x86_64
+- rebuild (missing devel package on ia32)
+- rebuild because static devel package didn't reach ia32 mirrors
+
+* Wed Jun 13 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0-0.20070226.2mdv2008.0
++ Revision: 38574
+- rebuild against libgadu
+
+
+* Tue Feb 27 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0-0.20070226.1mdv2007.0
++ Revision: 126626
+- new snapshot
+- remove duplicated provides/requires
+
+* Wed Feb 21 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0-0.20070220.1mdv2007.1
++ Revision: 123635
+- update to latest snapshot
+
+* Mon Jan 29 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0-0.20070128.2mdv2007.1
++ Revision: 115182
+- bump release tag
+- fix buildrequires
+- new snapshot
+- fix provides
+- remove rpatch from gpg.so
+- fix buildrequires
+- new snapshot
+- fixed path for perl modules
+- remove rpath for gpg.so
+- regenerate patch 0
+
+* Mon Jan 08 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0-0.20070107.3mdv2007.1
++ Revision: 105428
+- new snapshot, with new features
+
+* Sun Dec 24 2006 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0-0.20061223.3mdv2007.1
++ Revision: 101968
+- new snapshot
+
+* Fri Dec 08 2006 Tomasz Pawel Gajc <tpg@mandriva.org> 1.0-0.20061203.3mdv2007.1
++ Revision: 92157
+- bump release tag
+- fixed path for ioctld
+- Bump release tag
+- Fix build on x86_64
+- New snapshot
+- Add missing build requires
+- import ekg2
+- Import ekg2
+
+* Sun Dec 03 2006 TPG
+- initial package for mdv
+

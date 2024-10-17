@@ -6,7 +6,7 @@ Version:	1.0
 Release:	7.%{_snapshot}.1
 License:	GPLv2+
 Group:		Networking/Instant messaging
-URL:		http://ekg2.org/
+URL:		https://ekg2.org/
 Source0:	http://pl.ekg2.org/%{name}-%{_snapshot}.tar.bz2
 BuildRequires:	aspell-devel
 BuildRequires:	expat-devel
